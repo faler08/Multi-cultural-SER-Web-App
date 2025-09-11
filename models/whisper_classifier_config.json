@@ -1,0 +1,1 @@
+{"input_dim": 1280, "num_labels": 6, "hidden_dim": 512, "dropout": 0.3, "labels": ["Disgust", "Happy", "Fearful", "Sad", "Angry", "Neutral"]}
