@@ -1,257 +1,311 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Multi-cultural Speech Emotion Recognition</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multilingual Emotion Recognition from Speech</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
+    /* ==== Futuristic dark theme ==== */
     :root {
-      --primary-blue: #1976D2;
-      --dark-blue: #0D47A1;
-      --light-blue: #BBDEFB;
-      --accent-blue: #2196F3;
-      --background-gradient: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
-      --card-shadow: 0 8px 20px rgba(33, 150, 243, 0.15);
+      --primary: #E0E6ED;
+      --secondary: #9AA5B1;
+      --accent: #00E5FF;
+      --background: #0A0F1C;
+      --card-bg: #141B2D;
+      --glow: 0 0 10px rgba(0, 229, 255, 0.6), 0 0 20px rgba(0, 229, 255, 0.3);
     }
-    
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    
     body {
-      font-family: 'Segoe UI', 'Roboto', sans-serif;
+      font-family: 'Roboto', sans-serif;
+      background: radial-gradient(circle at top left, #0D1526, #0A0F1C 70%);
+      padding: 20px;
+      color: var(--primary);
       margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      background: var(--background-gradient);
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 30px 20px;
     }
-    
     .container {
-      width: 100%;
-      max-width: 800px;
-      background: white;
+      max-width: 900px;
+      margin: auto;
+      background: var(--card-bg);
       border-radius: 16px;
-      box-shadow: var(--card-shadow);
+      box-shadow: 0 0 25px rgba(0,0,0,0.6);
       overflow: hidden;
-      margin-top: 20px;
     }
-    
     .header {
-      background: var(--primary-blue);
-      color: white;
-      padding: 25px;
+      background: linear-gradient(90deg, #0F2027, #203A43, #2C5364);
+      color: var(--primary);
+      padding: 40px 20px;
       text-align: center;
     }
-    
-    h1 {
-      font-weight: 300;
-      font-size: 28px;
-      letter-spacing: 0.5px;
+    .header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 600;
       margin: 0;
+      font-size: 2em;
+      text-shadow: var(--glow);
+      letter-spacing: 1px;
     }
-    
-    .content {
-      padding: 30px;
-    }
-    
-    .upload-container {
-      background: #F5F9FF;
-      border: 2px dashed var(--light-blue);
-      border-radius: 12px;
-      padding: 30px;
-      text-align: center;
-      margin-bottom: 25px;
-      transition: all 0.3s ease;
-    }
-    
-    .upload-container:hover {
-      border-color: var(--accent-blue);
-      background: #E8F4FF;
-    }
-    
-    .upload-icon {
-      width: 60px;
-      height: 60px;
-      color: var(--primary-blue);
-      margin: 0 auto 15px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .file-input {
-      margin: 15px 0;
-      width: 100%;
-    }
-    
-    input[type="file"] {
-      width: 100%;
-      padding: 12px;
-      background: white;
-      border-radius: 8px;
-      border: 1px solid #BBDEFB;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    
-    input[type="file"]:hover {
-      border-color: var(--accent-blue);
-    }
-    
-    button {
-      background: var(--primary-blue);
-      color: white;
-      border: none;
-      padding: 14px 28px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: 500;
-      transition: all 0.3s;
-      width: 100%;
+    .subheader {
+      font-size: 0.9em;
+      color: var(--secondary);
       margin-top: 10px;
     }
-    
-    button:hover {
-      background: var(--dark-blue);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(13, 71, 161, 0.2);
+    .content {
+      padding: 30px;
+      line-height: 1.6;
     }
-    
+    .description {
+      margin-bottom: 25px;
+      padding: 20px;
+      background: rgba(20, 30, 50, 0.8);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      font-size: 0.95em;
+    }
+    .upload-container {
+      border: 2px dashed rgba(0, 229, 255, 0.5);
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      background: rgba(10, 15, 28, 0.6);
+      margin-bottom: 30px;
+      transition: all 0.3s;
+    }
+    .upload-container:hover {
+      background: rgba(20, 30, 50, 0.9);
+      box-shadow: var(--glow);
+    }
+    button {
+      background: var(--accent);
+      color: #0A0F1C;
+      border: none;
+      padding: 12px 24px;
+      margin-top: 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.95em;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--glow);
+    }
+    input[type="file"] {
+      margin-top: 12px;
+      color: var(--secondary);
+    }
     #result {
       margin-top: 30px;
     }
-    
     .result-card {
-      background: white;
+      padding: 22px;
+      border-left: 4px solid var(--accent);
       border-radius: 12px;
-      padding: 25px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      border-left: 4px solid var(--accent-blue);
+      background: rgba(20, 30, 50, 0.85);
+      box-shadow: 0 0 15px rgba(0,229,255,0.2);
     }
-    
-    .prediction {
-      font-size: 22px;
-      color: var(--dark-blue);
-      font-weight: 600;
-      margin-bottom: 20px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid #E3F2FD;
+    .result-card strong {
+      color: var(--accent);
     }
-    
-    .probabilities {
-      margin-top: 20px;
-    }
-    
-    .probabilities h3 {
-      color: var(--primary-blue);
-      margin-bottom: 15px;
-      font-weight: 500;
-    }
-    
     table {
-      border-collapse: collapse;
       width: 100%;
-      margin-top: 15px;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      border-collapse: collapse;
+      margin-top: 14px;
+      font-size: 0.9em;
     }
-    
     th, td {
-      padding: 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 10px;
       text-align: center;
+      color: var(--secondary);
     }
-    
     th {
-      background: var(--light-blue);
-      color: var(--dark-blue);
-      font-weight: 500;
+      background: rgba(0,229,255,0.1);
+      font-weight: 600;
+      color: var(--primary);
     }
-    
-    tr:nth-child(even) {
-      background: #F8FCFF;
-    }
-    
-    tr:hover {
-      background: #E3F2FD;
-    }
-    
     .processing {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 30px;
+      text-align: center;
+      padding: 25px;
     }
-    
     .spinner {
-      width: 50px;
-      height: 50px;
-      border: 4px solid var(--light-blue);
-      border-top: 4px solid var(--primary-blue);
+      width: 55px;
+      height: 55px;
+      border: 4px solid rgba(255,255,255,0.1);
+      border-top: 4px solid var(--accent);
       border-radius: 50%;
       animation: spin 1s linear infinite;
-      margin-bottom: 20px;
+      margin: auto;
+      box-shadow: var(--glow);
     }
-    
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {transform: rotate(0deg);}
+      100% {transform: rotate(360deg);}
     }
-    
-    .footer {
+    .disclaimer {
       margin-top: 30px;
-      text-align: center;
-      color: #607D8B;
-      font-size: 14px;
+      padding: 18px;
+      font-size: 0.85em;
+      color: var(--secondary);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      line-height: 1.4;
+    }
+    .disclaimer strong {
+      color: var(--accent);
+    }
+    @media (max-width: 700px) {
+      .content {
+        padding: 20px;
+      }
+      .header h1 {
+        font-size: 1.5em;
+      }
+      button {
+        width: 100%;
+        margin-top: 10px;
+      }
+      .upload-container {
+        padding: 20px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <h1>Multi-cultural Speech Emotion Recognition</h1>
+      <h1>Multilingual Emotion Recognition from Speech</h1>
+      <div class="subheader">Final Master’s Project in Artificial Intelligence</div>
     </div>
-    
     <div class="content">
+
+      <!-- Project description --> 
+      <div class="description"> 
+        <p> This project introduces an AI model for <strong>emotion recognition in speech</strong>, designed to work across <strong>languages and demographics</strong>. By leveraging <em>Whisper’s encoder</em> for embedding generation, the system aims to provide a robust and fair solution for multicultural emotion detection. The goal is to ensure accessibility and inclusivity, regardless of the speaker’s background. </p> <p> Learn more about the implementation on <a href="https://github.com/faler08/Multi-cultural-SER-Web-App" target="_blank" style="color:var(--accent);">GitHub</a>. 
+        </p> 
+      </div>
+
+      <!-- Upload file -->
       <div class="upload-container">
-        <div class="upload-icon">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
-          </svg>
-        </div>
-        <p>Upload a .wav file to analyze its emotional content</p>
-        
+        <p><strong>Upload an audio file (.wav)</strong></p>
         <form id="upload-form">
-          <div class="file-input">
-            <input type="file" name="file" accept=".wav" required>
-          </div>
-          <button type="submit">Predict</button>
+          <input type="file" name="file" accept=".wav" required>
+          <br>
+          <button type="submit">Analyze Emotion</button>
         </form>
       </div>
-      
+
+      <!-- Record audio -->
+      <div class="upload-container">
+        <p><strong>Or record your voice in real-time</strong></p>
+        <button id="start-record">Start Recording</button>
+        <button id="stop-record" disabled>Stop & Analyze</button>
+        <p id="recording-status" style="margin-top:12px;color:var(--secondary)"></p>
+      </div>
+
       <div id="result"></div>
+
+      <!-- Disclaimer --> 
+       <div class="disclaimer"> 
+        <p> 
+          <strong>Disclaimer:</strong> This application is a research prototype developed as part of a Master’s thesis. It is not intended for clinical use, nor should it be used as a substitute for professional judgment. The detection of emotions in speech is a complex task, and this model provides only probabilistic outputs. In line with the <em>EU AI Act</em>, the system is presented transparently as an experimental tool. It does not attempt to reduce human emotional experience to a single label, nor should it be relied upon for sensitive decision-making regarding an individual’s well-being.
+        </p> 
+      </div>
     </div>
   </div>
 
   <script>
-    const form = document.getElementById("upload-form");
     const resultDiv = document.getElementById("result");
 
-    form.addEventListener("submit", async (e) => {
+    // ========== File upload ==========
+    const uploadForm = document.getElementById("upload-form");
+    uploadForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const formData = new FormData(form);
+      const formData = new FormData(uploadForm);
+      await sendToServer(formData);
+    });
 
+    // ========== Recording ==========
+    let mediaRecorder;
+    let audioChunks = [];
+    const startBtn = document.getElementById("start-record");
+    const stopBtn = document.getElementById("stop-record");
+    const statusText = document.getElementById("recording-status");
+
+    startBtn.addEventListener("click", async () => {
+      audioChunks = [];
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorder = new MediaRecorder(stream);
+      mediaRecorder.start();
+      statusText.textContent = "Recording...";
+      startBtn.disabled = true;
+      stopBtn.disabled = false;
+
+      mediaRecorder.ondataavailable = event => {
+        audioChunks.push(event.data);
+      };
+    });
+
+    stopBtn.addEventListener("click", async () => {
+      mediaRecorder.stop();
+      statusText.textContent = "Processing recording...";
+      stopBtn.disabled = true;
+      startBtn.disabled = false;
+
+      mediaRecorder.onstop = async () => {
+        const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+        const arrayBuffer = await audioBlob.arrayBuffer();
+        const audioContext = new AudioContext();
+        const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+
+        const wavBlob = encodeWAV(audioBuffer.getChannelData(0), audioBuffer.sampleRate);
+
+        const formData = new FormData();
+        formData.append("file", wavBlob, "recording.wav");
+        await sendToServer(formData);
+        statusText.textContent = "";
+      };
+    });
+
+    // ========== WAV encoder ==========
+    function encodeWAV(samples, sampleRate) {
+      const buffer = new ArrayBuffer(44 + samples.length * 2);
+      const view = new DataView(buffer);
+
+      writeString(view, 0, 'RIFF');
+      view.setUint32(4, 36 + samples.length * 2, true);
+      writeString(view, 8, 'WAVE');
+      writeString(view, 12, 'fmt ');
+      view.setUint32(16, 16, true);
+      view.setUint16(20, 1, true);
+      view.setUint16(22, 1, true);
+      view.setUint32(24, sampleRate, true);
+      view.setUint32(28, sampleRate * 2, true);
+      view.setUint16(32, 2, true);
+      view.setUint16(34, 16, true);
+      writeString(view, 36, 'data');
+      view.setUint32(40, samples.length * 2, true);
+
+      let offset = 44;
+      for (let i = 0; i < samples.length; i++, offset += 2) {
+        const s = Math.max(-1, Math.min(1, samples[i]));
+        view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+      }
+      return new Blob([view], { type: "audio/wav" });
+    }
+
+    function writeString(view, offset, string) {
+      for (let i = 0; i < string.length; i++) {
+        view.setUint8(offset + i, string.charCodeAt(i));
+      }
+    }
+
+    // ========== Common function ==========
+    async function sendToServer(formData) {
       resultDiv.innerHTML = `
         <div class="processing">
           <div class="spinner"></div>
-          <p>Analyzing audio file...</p>
+          <p>Analyzing audio...</p>
         </div>
       `;
 
@@ -260,31 +314,26 @@
           method: "POST",
           body: formData
         });
-
         const data = await response.json();
 
         if (data.error) {
-          resultDiv.innerHTML = `<div class="result-card"><p style="color:#d32f2f">Error: ${data.error}</p></div>`;
+          resultDiv.innerHTML = `<div class="result-card"><p style="color:red">${data.error}</p></div>`;
           return;
         }
 
         let html = `<div class="result-card">`;
-        html += `<div class="prediction">Detected Emotion: <span style="color:var(--dark-blue)">${data.prediction}</span></div>`;
-        html += `<div class="probabilities">`;
-        html += `<h3>Confidence Levels</h3>`;
+        html += `<div class="prediction"><strong>Detected Emotion:</strong> ${data.prediction}</div>`;
         html += `<table><tr><th>Emotion</th><th>Probability</th></tr>`;
-
         for (const [label, prob] of Object.entries(data.probabilities)) {
-          const percentage = (prob*100).toFixed(2);
-          html += `<tr><td>${label}</td><td>${percentage}%</td></tr>`;
+          html += `<tr><td>${label}</td><td>${(prob*100).toFixed(2)}%</td></tr>`;
         }
-        html += "</table></div></div>";
+        html += "</table></div>";
 
         resultDiv.innerHTML = html;
-      } catch (error) {
-        resultDiv.innerHTML = `<div class="result-card"><p style="color:#d32f2f">Network error: Please try again</p></div>`;
+      } catch (err) {
+        resultDiv.innerHTML = `<div class="result-card"><p style="color:red">Network error</p></div>`;
       }
-    });
+    }
   </script>
 </body>
 </html>
