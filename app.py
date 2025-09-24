@@ -7,6 +7,11 @@ import json
 import numpy as np
 from transformers import WhisperFeatureExtractor, WhisperModel
 import os
+from pydub import AudioSegment
+import io
+from pydub.utils import which
+AudioSegment.converter = which("ffmpeg")
+
 
 # ======================
 # Classifier Head
@@ -93,22 +98,27 @@ def index():
 @app.route("/predict", methods=["POST"])
 def predict_endpoint():
     if "file" not in request.files:
-        return jsonify({"error": "No audio file received"}), 400
+        return jsonify({"error": "No file uploaded"}), 400
+    
+    file = request.files["file"]
 
-    audio_file = request.files["file"]
-    temp_path = "tmp_audio.wav"
-    audio_file.save(temp_path)
-
+    # Load the audio
     try:
-        pred_label, result = predict(temp_path)
-    finally:
-        if os.path.exists(temp_path):
-            os.remove(temp_path)
+        audio = AudioSegment.from_file(file)
+    except Exception as e:
+        return jsonify({"error": f"Could not read audio: {e}"}), 400
 
-    return jsonify({
-        "prediction": pred_label,
-        "probabilities": result
-    })
+    # Change to wav
+    temp_wav = "uploads/tmp_audio.wav"
+    audio.export(temp_wav, format="wav")
+
+    # Make the prediction
+    try:
+        pred_label, result = predict(temp_wav)
+        return jsonify({"prediction": pred_label, "probabilities": result})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=False)
